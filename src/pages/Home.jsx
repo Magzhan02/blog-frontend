@@ -1,5 +1,7 @@
 import React from 'react';
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, Grid } from '@mui/material';
+
+import Post from '../components/Post';
 
 const Home = () => {
   const [isActive, setIsActive] = React.useState(0);
@@ -15,13 +17,27 @@ const Home = () => {
   return (
     <>
       <Tabs
-        style={{ marginBottom: 15 }}
+        style={{ marginBottom: 35 }}
         value={isActive}
         aria-label="basic tabs example"
         onClick={handleChange}>
         <Tab label="Новые" />
         <Tab label="Популярные" />
       </Tabs>
+      <Grid container spacing={12} style={{ marginBottom: 35 }}>
+        <Grid item xs={5}>
+          <Post />
+        </Grid>
+        <Grid item xs={5}>
+          <Post />
+        </Grid>
+        <Grid item xs={5}>
+          <Post />
+        </Grid>
+        <Grid item xs={5}>
+          <Post />
+        </Grid>
+      </Grid>
     </>
   );
 };
