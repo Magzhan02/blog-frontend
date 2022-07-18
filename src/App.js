@@ -13,7 +13,7 @@ const App = () => {
       <Header />
       <Container maxWidth="lg">
         <Home />
-        {/* <FullPost /> */}
+        {/*   <FullPost /> */}
       </Container>
     </div>
   );

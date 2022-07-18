@@ -66,6 +66,10 @@
                 flex-direction: row;
                 margin-top: 30px;
                 justify-content: space-between;
+
+                .createdAt{
+                    opacity: 0.5;
+                }
                 
                 .tags{
                     display: inherit;
