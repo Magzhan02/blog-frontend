@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 
@@ -12,9 +13,9 @@ const Header = () => {
             <div className={styles.logo}>Personal-Blog</div>
           </a>
           <div className={styles.button}>
-            <a href="/posts/create">
+            <Link to="addpost">
               <Button variant="outlined">Написать статью</Button>
-            </a>
+            </Link>
           </div>
         </div>
       </Container>

@@ -8,14 +8,17 @@ import { Home, FullPost, AddPost } from './pages';
 
 const App = () => {
   return (
-    <div>
+    <>
       <Header />
       <Container maxWidth="lg">
-        {/* <Home />
-        <FullPost /> */}
-        <AddPost />
+        <Routes>
+          <Route path="" element={<Home />} />
+          <Route path="fullpost" element={<FullPost />} />
+          <Route path="addpost" element={<AddPost />} />
+          <Route path="*" element={<div> К сожалени данная страница отсутствует</div>} />
+        </Routes>
       </Container>
-    </div>
+    </>
   );
 };
 

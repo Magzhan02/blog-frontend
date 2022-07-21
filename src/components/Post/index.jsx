@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import DeleteIcon from '@mui/icons-material/Clear';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 import styles from './Post.module.scss';
 
@@ -32,7 +33,9 @@ const index = ({
           </IconButton>
         </a>
       </div>
-      <img width={480} height={260} src={imageUrl} alt={title} />
+      <Link to="fullpost">
+        <img width={480} height={260} src={imageUrl} alt={title} />
+      </Link>
       <div className={styles.wrapper}>
         <div className={clsx(styles.content, { [styles.contentFull]: isFullPost })}>
           <h2 className={styles.title}>{title}</h2>
