@@ -4,16 +4,16 @@ import { Container } from '@mui/material';
 
 import Header from './components/Header';
 
-import Home from './pages/Home';
-import FullPost from './pages/FullPost';
+import { Home, FullPost, AddPost } from './pages';
 
 const App = () => {
   return (
     <div>
       <Header />
       <Container maxWidth="lg">
-        <Home />
-        {/*   <FullPost /> */}
+        {/* <Home />
+        <FullPost /> */}
+        <AddPost />
       </Container>
     </div>
   );

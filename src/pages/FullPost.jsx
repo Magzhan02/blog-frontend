@@ -4,7 +4,14 @@ import Post from '../components/Post';
 const FullPost = () => {
   return (
     <div>
-      <Post>
+      <Post
+        id={1}
+        title="One-Punch Man"
+        imageUrl="https://gen.jut.su/uploads/newsthumbs/1545736844_bez-imeni-1.jpg"
+        createdAt={'12 июня 2022 г.'}
+        viewsCount={5}
+        tags={['react', 'backend', 'frontend']}
+        isFullPost>
         <p>
           «One-Punch Man» побил все рекорды популярности в 2015 году, на полноправной основе став
           главным хитом года и заслужив признание поклонников аниме по всему миру за счёт

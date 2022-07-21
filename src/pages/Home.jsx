@@ -32,9 +32,9 @@ const Home = () => {
               title="One-Punch Man"
               imageUrl="https://gen.jut.su/uploads/newsthumbs/1545736844_bez-imeni-1.jpg"
               createdAt={'12 июня 2022 г.'}
-              viewsCount={150}
+              viewsCount={5}
               commentsCount={3}
-              tags={['React', '#FrontEnd', 'BackEnd']}>
+              tags={['React', 'Frontend', 'Backend']}>
               <p>
                 «One-Punch Man» побил все рекорды популярности в 2015 году, на полноправной основе
                 став главным хитом года и заслужив признание поклонников аниме по всему миру за счёт
