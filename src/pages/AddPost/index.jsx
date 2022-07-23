@@ -15,7 +15,7 @@ const AddPost = () => {
     try {
       const formData = new FormData();
       formData.append('image', event.target.files[0]);
-      const { data } = await axios.post('/uploads', formData);
+      const { data } = await axios.post('http://localhost:4444/upload', formData);
       setImageUrl(data.url);
     } catch (error) {
       console.warn(error);

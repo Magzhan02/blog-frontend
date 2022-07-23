@@ -22,20 +22,24 @@ const index = ({
   return (
     <div className={clsx(styles.post, { [styles.postFull]: isFullPost })}>
       <div className={styles.editButton}>
-        <a href={`/post/${_id}/edit`}>
+        <a href={`/posts/${_id}/edit`}>
           <IconButton>
             <EditIcon />
           </IconButton>
         </a>
-        <a href={`/post/${_id}/delete`}>
+        <a href={`/posts/${_id}/delete`}>
           <IconButton>
             <DeleteIcon />
           </IconButton>
         </a>
       </div>
-      <Link to="fullpost">
+      {isFullPost ? (
         <img width={480} height={260} src={imageUrl} alt={title} />
-      </Link>
+      ) : (
+        <Link to="fullpost">
+          <img width={480} height={260} src={imageUrl} alt={title} />
+        </Link>
+      )}
       <div className={styles.wrapper}>
         <div className={clsx(styles.content, { [styles.contentFull]: isFullPost })}>
           <h2 className={styles.title}>{title}</h2>

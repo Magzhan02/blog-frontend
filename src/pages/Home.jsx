@@ -1,10 +1,17 @@
 import React from 'react';
 import { Tabs, Tab, Grid } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { getPosts } from '../redux/slice/posts';
 
 import Post from '../components/Post';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = React.useState(0);
+
+  React.useEffect(() => {
+    dispatch(getPosts);
+  }, []);
 
   const handleChange = () => {
     if (isActive === 0) {
@@ -25,7 +32,7 @@ const Home = () => {
         <Tab label="Популярные" />
       </Tabs>
       <Grid container spacing={12} style={{ marginBottom: 35 }}>
-        {[...Array(5)].map(() => (
+        {[...Array(5)].map((i) => (
           <Grid item xs={5}>
             <Post
               id={1}
