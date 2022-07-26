@@ -5,38 +5,42 @@ import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import DeleteIcon from '@mui/icons-material/Clear';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
 
 import styles from './Post.module.scss';
 
-const index = ({
-  _id,
+const Post = ({
+  id,
   title,
   createdAt,
   imageUrl,
   viewsCount,
   tags,
   children,
-  isFullPost,
   isLoading,
+  isFullPost,
 }) => {
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
   return (
     <div className={clsx(styles.post, { [styles.postFull]: isFullPost })}>
       <div className={styles.editButton}>
-        <a href={`/posts/${_id}/edit`}>
+        <Link to={`/posts/${id}/edit`}>
           <IconButton>
             <EditIcon />
           </IconButton>
-        </a>
-        <a href={`/posts/${_id}/delete`}>
+        </Link>
+        <Link to={`/posts/${id}/delete`}>
           <IconButton>
             <DeleteIcon />
           </IconButton>
-        </a>
+        </Link>
       </div>
       {isFullPost ? (
         <img width={480} height={260} src={imageUrl} alt={title} />
       ) : (
-        <Link to="fullpost">
+        <Link to={`/posts/${id}`}>
           <img width={480} height={260} src={imageUrl} alt={title} />
         </Link>
       )}
@@ -45,7 +49,9 @@ const index = ({
           <h2 className={styles.title}>{title}</h2>
           {children && <div className={styles.description}>{children}</div>}
           <div className={styles.info}>
-            <span className={styles.createdAt}>{createdAt}</span>
+            <Moment element="span" className={styles.createdAt} format="YYYY/MM/DD">
+              {createdAt}
+            </Moment>
             <ul className={styles.tags}>
               {tags.map((tag, index) => (
                 <li key={index}>{tag}</li>
@@ -62,4 +68,4 @@ const index = ({
   );
 };
 
-export default index;
+export default Post;

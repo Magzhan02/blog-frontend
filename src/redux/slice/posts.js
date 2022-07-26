@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import axios from '../../axios';
 
 export const getPosts = createAsyncThunk('posts/getPosts', async () => {
@@ -11,11 +12,6 @@ const initialState = {
     items: [],
     status: 'loading',
   },
-
-  tags: {
-    items: [],
-    status: 'loading',
-  },
 };
 
 const postsSlice = createSlice({
@@ -23,6 +19,19 @@ const postsSlice = createSlice({
   initialState,
 
   reducers: {},
+  extraReducers: {
+    [getPosts.pending]: (state) => {
+      state.posts.status = 'loading';
+    },
+    [getPosts.fulfilled]: (state, action) => {
+      state.posts.status = 'loaded';
+      state.posts.items = action.payload;
+    },
+    [getPosts.rejected]: (state) => {
+      state.posts.status = 'error';
+      state.posts.items = [];
+    },
+  },
 });
 
 export const postsReducer = postsSlice.reducer;

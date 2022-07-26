@@ -13,7 +13,7 @@ const App = () => {
       <Container maxWidth="lg">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="fullpost" element={<FullPost />} />
+          <Route path="posts/:id" element={<FullPost />} />
           <Route path="addpost" element={<AddPost />} />
           <Route path="*" element={<div> К сожалени данная страница отсутствует</div>} />
         </Routes>

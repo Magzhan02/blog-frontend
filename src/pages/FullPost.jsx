@@ -1,33 +1,42 @@
 import React from 'react';
 import Post from '../components/Post';
 
+import { useParams } from 'react-router-dom';
+import axios from '../axios';
+
 const FullPost = () => {
+  const { id } = useParams();
+  const [post, setPost] = React.useState();
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    axios
+      .get(`/posts/${id}`)
+      .then((resp) => {
+        setPost(resp.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <Post isLoading={isLoading} isFullPost />;
+  }
+  console.log(post);
+
   return (
     <div>
       <Post
-        id={1}
-        title="One-Punch Man"
+        id={post._id}
+        title={post.title}
         imageUrl="https://gen.jut.su/uploads/newsthumbs/1545736844_bez-imeni-1.jpg"
-        createdAt={'12 июня 2022 г.'}
+        createdAt={post.createdAt}
         viewsCount={5}
-        tags={['react', 'backend', 'frontend']}
+        tags={post.tags}
         isFullPost>
-        <p>
-          «One-Punch Man» побил все рекорды популярности в 2015 году, на полноправной основе став
-          главным хитом года и заслужив признание поклонников аниме по всему миру за счёт
-          головокружительной проработки боевых сцен и, разумеется, хорошего юмора. «One-Punch Man»
-          побил все рекорды популярности в 2015 году, на полноправной основе став главным хитом года
-          и заслужив признание поклонников аниме по всему миру за счёт головокружительной проработки
-          боевых сцен и, разумеется, хорошего юмора. «One-Punch Man» побил все рекорды популярности
-          в 2015 году, на полноправной основе став главным хитом года и заслужив признание
-          поклонников аниме по всему миру за счёт головокружительной проработки боевых сцен и,
-          разумеется, хорошего юмора. «One-Punch Man» побил все рекорды популярности в 2015 году, на
-          полноправной основе став главным хитом года и заслужив признание поклонников аниме по
-          всему миру за счёт головокружительной проработки боевых сцен и, разумеется, хорошего
-          юмора. «One-Punch Man» побил все рекорды популярности в 2015 году, на полноправной основе
-          став главным хитом года и заслужив признание поклонников аниме по всему миру за счёт
-          головокружительной проработки боевых сцен и, разумеется, хорошего юмора.
-        </p>
+        <p>{post.text}</p>
       </Post>
     </div>
   );
