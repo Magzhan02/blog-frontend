@@ -4,7 +4,7 @@ import { Container } from '@mui/material';
 
 import Header from './components/Header';
 
-import { Home, FullPost, AddPost } from './pages';
+import { Home, FullPost, AddPost, Login } from './pages';
 
 const App = () => {
   return (
@@ -15,6 +15,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="posts/:id" element={<FullPost />} />
           <Route path="addpost" element={<AddPost />} />
+          <Route path="login" element={<Login />} />
           <Route path="*" element={<div> К сожалени данная страница отсутствует</div>} />
         </Routes>
       </Container>

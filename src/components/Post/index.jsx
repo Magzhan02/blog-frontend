@@ -37,16 +37,12 @@ const Post = ({
           </IconButton>
         </Link>
       </div>
-      {isFullPost ? (
-        <img width={480} height={260} src={imageUrl} alt={title} />
-      ) : (
-        <Link to={`/posts/${id}`}>
-          <img width={480} height={260} src={imageUrl} alt={title} />
-        </Link>
-      )}
+      {imageUrl ? <img src={imageUrl} alt={title} /> : ''}
       <div className={styles.wrapper}>
         <div className={clsx(styles.content, { [styles.contentFull]: isFullPost })}>
-          <h2 className={styles.title}>{title}</h2>
+          <Link to={`/posts/${id}`}>
+            <h2 className={styles.title}>{title}</h2>
+          </Link>
           {children && <div className={styles.description}>{children}</div>}
           <div className={styles.info}>
             <Moment element="span" className={styles.createdAt} format="YYYY/MM/DD">

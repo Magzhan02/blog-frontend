@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from '../components/Post';
-
+import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
 import axios from '../axios';
 
@@ -36,7 +36,7 @@ const FullPost = () => {
         viewsCount={5}
         tags={post.tags}
         isFullPost>
-        <p>{post.text}</p>
+        <ReactMarkdown children={post.text} />
       </Post>
     </div>
   );

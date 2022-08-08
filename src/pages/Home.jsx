@@ -45,7 +45,7 @@ const Home = () => {
               <Post
                 id={obj._id}
                 title={obj.title}
-                imageUrl="https://gen.jut.su/uploads/newsthumbs/1545736844_bez-imeni-1.jpg"
+                imageUrl={obj.imageUrl ? `http://localhost:4444/${obj.imageUrl}` : ''}
                 createdAt={obj.createdAt}
                 viewsCount={5}
                 commentsCount={3}
