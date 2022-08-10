@@ -1,13 +1,21 @@
 import React from 'react';
 import { Container, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { isAuthUser } from '../../redux/slice/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { isAuthUser, logout } from '../../redux/slice/auth';
 import { Link } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(isAuthUser);
+
+  const onClickLogout = () => {
+    if (window.confirm('Вы уверены что хотите выйти из аккаунта?')) {
+      dispatch(logout());
+    }
+  };
+
   return (
     <div className={styles.header}>
       <Container maxWidth="lg">
@@ -21,7 +29,7 @@ const Header = () => {
                 <Link to="addpost">
                   <Button variant="outlined">Написать статью</Button>
                 </Link>
-                <Button variant="outlined" color="error">
+                <Button onClick={onClickLogout} variant="outlined" color="error">
                   Выйти
                 </Button>
               </>

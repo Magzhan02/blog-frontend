@@ -2,13 +2,11 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;
-   /*  width: 480px; */
     width: auto;
     height: auto;
- /*    height: 450px; */
     position: relative;
     border-radius: 20px;
-
+      
     .editButton{
         position: absolute;
         right: 1px;
@@ -17,6 +15,7 @@
             color: #ccc;
         }
     }
+    
     img{
         width: 480px;
         height: 260px;
@@ -32,6 +31,7 @@
         position: relative;
         border-radius: 20px;
         margin-bottom: 80px;
+
 
         img{
             width: 100%;
@@ -53,9 +53,7 @@
               overflow: hidden; 
               text-overflow: ellipsis; 
             
-              &:hover{
-                color: #2b81d5;
-              }
+              
             }
             
             .description{
@@ -71,16 +69,11 @@
                 flex-direction: row;
                 margin-top: 30px;
                 justify-content: space-between;
-
-                .createdAt{
-                    opacity: 0.5;
-                }
+                opacity: 0.6;
                 
                 .tags{
                     display: inherit;
                     flex-direction: row;
-                    opacity: 0.5;
-                    margin-right: 20%;
                     
                     li{
                         margin: 0 5px;
@@ -88,14 +81,7 @@
                 }
 
                 .viewCount{
-                    position: absolute;
-                    right: 15px;
-                    display: flex;
-                    align-items: center; 
-
-                    svg{
-                        margin-right: 3px;
-                    }
+                   display: none;
                 }
             }
 
@@ -115,6 +101,7 @@
                     margin-bottom: 20px;
 
                     .viewCount{
+                        display: block;
                         position: relative;
                         svg{
                             position: absolute;

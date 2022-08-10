@@ -15,7 +15,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -25,15 +24,22 @@ const Login = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (params) => {
-    dispath(fetchAuth(params));
+  const onSubmit = async (params) => {
+    const data = await dispath(fetchAuth(params));
+
+    if (!data.payload) {
+      dispath(fetchAuth(null));
+      return alert('Не удалось авторизоваться');
+    }
+
+    if (data.payload.token) {
+      window.localStorage.setItem('token', data.payload.token);
+    }
   };
 
   if (isAuth) {
     return <Navigate to="/" />;
   }
-
-  console.log(isAuth);
 
   return (
     <Paper classes={{ root: styles.login }}>

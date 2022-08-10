@@ -22,7 +22,6 @@ const Home = () => {
       setIsActive(0);
     }
   };
-  console.log(posts);
 
   return (
     <>
@@ -37,11 +36,11 @@ const Home = () => {
       <Grid container spacing={12} style={{ marginBottom: 35 }}>
         {(isLoading ? [...Array(4)] : posts.items).map((obj, i) =>
           isLoading ? (
-            <Grid item xs={5}>
+            <Grid item xs={5} key={i}>
               <PostsSkeleton />
             </Grid>
           ) : (
-            <Grid item xs={5}>
+            <Grid item xs={5} key={obj._id}>
               <Post
                 id={obj._id}
                 title={obj.title}

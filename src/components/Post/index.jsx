@@ -42,22 +42,22 @@ const Post = ({
         <div className={clsx(styles.content, { [styles.contentFull]: isFullPost })}>
           <Link to={`/posts/${id}`}>
             <h2 className={styles.title}>{title}</h2>
+            {children && <div className={styles.description}>{children}</div>}
+            <div className={styles.info}>
+              <Moment element="span" className={styles.createdAt} format="YYYY/MM/DD">
+                {createdAt}
+              </Moment>
+              <ul className={styles.tags}>
+                {tags.map((tag, index) => (
+                  <li key={index}>{tag}</li>
+                ))}
+              </ul>
+              <span className={styles.viewCount}>
+                <EyeIcon />
+                {viewsCount}
+              </span>
+            </div>
           </Link>
-          {children && <div className={styles.description}>{children}</div>}
-          <div className={styles.info}>
-            <Moment element="span" className={styles.createdAt} format="YYYY/MM/DD">
-              {createdAt}
-            </Moment>
-            <ul className={styles.tags}>
-              {tags.map((tag, index) => (
-                <li key={index}>{tag}</li>
-              ))}
-            </ul>
-            <span className={styles.viewCount}>
-              <EyeIcon />
-              {viewsCount}
-            </span>
-          </div>
         </div>
       </div>
     </div>
