@@ -6,7 +6,9 @@ import DeleteIcon from '@mui/icons-material/Clear';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import { useDispatch } from 'react-redux';
 
+import { deletePost } from '../../redux/slice/posts';
 import styles from './Post.module.scss';
 
 const Post = ({
@@ -20,9 +22,16 @@ const Post = ({
   isLoading,
   isFullPost,
 }) => {
+  const dispatch = useDispatch();
+
   if (isLoading) {
     return <div>loading...</div>;
   }
+
+  const onClickDeletePost = () => {
+    dispatch(deletePost(id));
+  };
+
   return (
     <div className={clsx(styles.post, { [styles.postFull]: isFullPost })}>
       <div className={styles.editButton}>
@@ -31,18 +40,20 @@ const Post = ({
             <EditIcon />
           </IconButton>
         </Link>
-        <Link to={`/posts/${id}/delete`}>
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Link>
+        <IconButton onClick={onClickDeletePost}>
+          <DeleteIcon />
+        </IconButton>
       </div>
       {imageUrl ? <img src={imageUrl} alt={title} /> : ''}
       <div className={styles.wrapper}>
         <div className={clsx(styles.content, { [styles.contentFull]: isFullPost })}>
           <Link to={`/posts/${id}`}>
             <h2 className={styles.title}>{title}</h2>
-            {children && <div className={styles.description}>{children}</div>}
+            {children && (
+              <div className={styles.description}>
+                <p>{children}</p>
+              </div>
+            )}
             <div className={styles.info}>
               <Moment element="span" className={styles.createdAt} format="YYYY/MM/DD">
                 {createdAt}

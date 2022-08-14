@@ -24,14 +24,13 @@ const FullPost = () => {
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />;
   }
-  console.log(post);
 
   return (
     <div>
       <Post
         id={post._id}
         title={post.title}
-        imageUrl="https://gen.jut.su/uploads/newsthumbs/1545736844_bez-imeni-1.jpg"
+        imageUrl={post.image ? `http://localhost:4444${post.image}` : ''}
         createdAt={post.createdAt}
         viewsCount={5}
         tags={post.tags}

@@ -44,12 +44,12 @@ const Home = () => {
               <Post
                 id={obj._id}
                 title={obj.title}
-                imageUrl={obj.imageUrl ? `http://localhost:4444/${obj.imageUrl}` : ''}
+                imageUrl={obj.image ? `http://localhost:4444${obj.image}` : ''}
                 createdAt={obj.createdAt}
                 viewsCount={5}
                 commentsCount={3}
                 tags={obj.tags}>
-                <p>{obj.text}</p>
+                <span>{obj.text}</span>
               </Post>
             </Grid>
           ),

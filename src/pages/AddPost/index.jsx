@@ -12,7 +12,7 @@ const AddPost = () => {
   const [title, setTitle] = React.useState('');
   const [value, setValue] = React.useState('');
   const [tags, setTags] = React.useState('');
-  const [imageUrl, setImageUrl] = React.useState();
+  const [image, setImage] = React.useState();
   const inputRef = React.useRef(null);
 
   const handleChangeFile = async (event) => {
@@ -21,14 +21,14 @@ const AddPost = () => {
       const file = event.target.files[0];
       formData.append('image', file);
       const { data } = await axios.post('/upload', formData);
-      setImageUrl(data.url);
+      setImage(data.url);
     } catch (error) {
       console.warn(error);
     }
   };
 
   const onClickRemoveImage = () => {
-    setImageUrl('');
+    setImage('');
   };
 
   const onChangeText = React.useCallback((value) => {
@@ -43,14 +43,14 @@ const AddPost = () => {
 
   const onSubmit = async () => {
     try {
-      const field = {
+      const fields = {
         title,
         tags,
-        imageUrl,
+        image,
         text: value,
       };
 
-      const { data } = await axios.post('/posts', field);
+      const { data } = await axios.post('/posts', fields);
       const id = data._id;
 
       navigate(`/posts/${id}`);
@@ -77,9 +77,9 @@ const AddPost = () => {
 
   return (
     <Paper style={{ padding: 30, marginBottom: 30 }}>
-      {imageUrl ? (
+      {image ? (
         <div className={styles.postImg}>
-          <img className={styles.image} src={`http://localhost:4444${imageUrl}`} alt="image" />
+          <img className={styles.image} src={`http://localhost:4444${image}`} alt="image" />
           <Button variant="outlined" color="error" size="large" onClick={onClickRemoveImage}>
             Удалить превью
           </Button>
