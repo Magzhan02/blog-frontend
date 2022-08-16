@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import DeleteIcon from '@mui/icons-material/Clear';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Moment from 'react-moment';
 import { useDispatch } from 'react-redux';
 

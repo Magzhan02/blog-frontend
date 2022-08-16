@@ -22,7 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="posts/:id" element={<FullPost />} />
-          <Route path="addpost" element={<AddPost />} />
+          <Route path="posts/:id/edit" element={<AddPost />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<div> К сожалени данная страница отсутствует</div>} />
         </Routes>

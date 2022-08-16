@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Paper, Button, TextField } from '@mui/material';
 import SimpleMDE from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
@@ -8,12 +8,14 @@ import axios from '../../axios';
 import styles from './AddPost.module.scss';
 
 const AddPost = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = React.useState('');
   const [value, setValue] = React.useState('');
   const [tags, setTags] = React.useState('');
   const [image, setImage] = React.useState();
   const inputRef = React.useRef(null);
+  const isEdit = Boolean(id);
 
   const handleChangeFile = async (event) => {
     try {
@@ -50,10 +52,15 @@ const AddPost = () => {
         text: value,
       };
 
-      const { data } = await axios.post('/posts', fields);
-      const id = data._id;
+      if (isEdit) {
+        await axios.patch(`/posts/${id}`, fields);
+        navigate(`/posts/${id}`);
+      }
 
-      navigate(`/posts/${id}`);
+      const { data } = await axios.post('/posts', fields);
+      const _id = data._id;
+
+      navigate(`/posts/${_id}`);
     } catch (error) {
       console.warn(error);
     }
@@ -74,6 +81,17 @@ const AddPost = () => {
     }),
     [],
   );
+
+  React.useEffect(() => {
+    if (id) {
+      axios.get(`posts/${id}`).then(({ data }) => {
+        setTitle(data.title);
+        setImage(data.image);
+        setTags(data.tags);
+        setValue(data.text);
+      });
+    }
+  }, []);
 
   return (
     <Paper style={{ padding: 30, marginBottom: 30 }}>
@@ -116,7 +134,7 @@ const AddPost = () => {
       />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} variant="outlined" color="success" size="large">
-          Опубликовать
+          {isEdit ? 'Редактировать' : 'Опубликовать'}
         </Button>
         <Button variant="outlined" color="error" size="large">
           Отменить
