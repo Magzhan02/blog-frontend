@@ -55,12 +55,11 @@ const AddPost = () => {
       if (isEdit) {
         await axios.patch(`/posts/${id}`, fields);
         navigate(`/posts/${id}`);
+      } else {
+        const { data } = await axios.post('/posts', fields);
+        const _id = data._id;
+        navigate(`/posts/${_id}`);
       }
-
-      const { data } = await axios.post('/posts', fields);
-      const _id = data._id;
-
-      navigate(`/posts/${_id}`);
     } catch (error) {
       console.warn(error);
     }

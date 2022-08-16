@@ -4,10 +4,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import DeleteIcon from '@mui/icons-material/Clear';
 import clsx from 'clsx';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { isAuthUser } from '../../redux/slice/auth';
 import { deletePost } from '../../redux/slice/posts';
 import styles from './Post.module.scss';
 
@@ -23,6 +24,7 @@ const Post = ({
   isFullPost,
 }) => {
   const dispatch = useDispatch();
+  const isAuth = useSelector(isAuthUser);
 
   if (isLoading) {
     return <div>loading...</div>;
@@ -34,16 +36,19 @@ const Post = ({
 
   return (
     <div className={clsx(styles.post, { [styles.postFull]: isFullPost })}>
-      <div className={styles.editButton}>
-        <Link to={`/posts/${id}/edit`}>
-          <IconButton>
-            <EditIcon />
+      {isAuth && (
+        <div className={styles.editButton}>
+          <Link to={`/posts/${id}/edit`}>
+            <IconButton>
+              <EditIcon />
+            </IconButton>
+          </Link>
+          <IconButton onClick={onClickDeletePost}>
+            <DeleteIcon />
           </IconButton>
-        </Link>
-        <IconButton onClick={onClickDeletePost}>
-          <DeleteIcon />
-        </IconButton>
-      </div>
+        </div>
+      )}
+
       {imageUrl ? <img src={imageUrl} alt={title} /> : ''}
       <div className={styles.wrapper}>
         <div className={clsx(styles.content, { [styles.contentFull]: isFullPost })}>
